@@ -5,7 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "xsolla-summer-school"
   config.vm.box = "ubuntu/trusty64"
   config.vm.synced_folder ".", "/home/xsolla"
-  config.vm.network "private_network", ip: "192.168.100.123"
+      config.vm.network "private_network", ip: "192.168.100.123"
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "1024"
@@ -19,5 +19,8 @@ Vagrant.configure(2) do |config|
      echo "mysql-server-5.6 mysql-server/root_password password root" | sudo debconf-set-selections
      echo "mysql-server-5.6 mysql-server/root_password_again password root" | sudo debconf-set-selections
      sudo apt-get install -y mysql-server-5.6
+     mysql -uroot -proot -e "GRANT ALL ON *.* TO root; flush privileges;"
+     sudo sed -i 's/bind-address/# bind-address/g' /etc/mysql/my.cnf
+     sudo service mysql restart
   SHELL
 end
