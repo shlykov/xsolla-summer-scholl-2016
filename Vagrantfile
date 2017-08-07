@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
      echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
      echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
      sudo apt-get install -y mysql-server-5.7
-     mysql -uroot -proot -e "CREATE USER root; GRANT ALL ON *.* TO root; flush privileges;"
+     mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root' IDENTIFIED BY 'root' WITH GRANT OPTION; flush privileges;"
      sudo sed -i 's/bind-address/# bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
      sudo service mysql restart
   SHELL
