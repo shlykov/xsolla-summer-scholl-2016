@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.hostname = "xsolla-summer-school"
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.synced_folder ".", "/home/xsolla"
       config.vm.network "private_network", ip: "192.168.100.123"
 
@@ -15,12 +15,12 @@ Vagrant.configure(2) do |config|
      sudo apt-get update && sudo apt-get install python-software-properties
      sudo add-apt-repository ppa:ondrej/php
      sudo apt-get update && sudo apt-get -y upgrade
-     sudo apt-get install -y php5.6-cli php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-mysql php5.6-gd php5.6-intl
-     echo "mysql-server-5.6 mysql-server/root_password password root" | sudo debconf-set-selections
-     echo "mysql-server-5.6 mysql-server/root_password_again password root" | sudo debconf-set-selections
-     sudo apt-get install -y mysql-server-5.6
-     mysql -uroot -proot -e "GRANT ALL ON *.* TO root; flush privileges;"
-     sudo sed -i 's/bind-address/# bind-address/g' /etc/mysql/my.cnf
+     sudo apt-get install -y php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-curl php7.1-mysql php7.1-gd php7.1-intl
+     echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
+     echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
+     sudo apt-get install -y mysql-server-5.7
+     mysql -uroot -proot -e "CREATE USER root; GRANT ALL ON *.* TO root; flush privileges;"
+     sudo sed -i 's/bind-address/# bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
      sudo service mysql restart
   SHELL
 end
