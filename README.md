@@ -1,1 +1,1 @@
-# xsolla-summer-scholl-2016
+# xsolla-summer-scholl-2017
